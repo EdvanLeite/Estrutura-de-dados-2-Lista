@@ -1,0 +1,3 @@
+INDEX VERSION 1.134+C:\Users\leite\OneDrive\Área de Trabalho\Estrutura de Dados - Lista 02\.metadata\.plugins\org.eclipse.jdt.core
+2494273011.index
+1865797976.index

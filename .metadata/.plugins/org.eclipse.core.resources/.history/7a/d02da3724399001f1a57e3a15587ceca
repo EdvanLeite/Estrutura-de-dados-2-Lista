@@ -1,0 +1,92 @@
+package utils;
+
+import java.util.Random;
+
+public class ArvoreBinaria {
+	private Node rootNode;
+
+	public Node initTree(int value) {
+		Node newNode = new Node();
+		newNode.setValor(value);
+		this.rootNode = newNode;
+
+		return newNode;
+	}
+
+	public Node addNode(Boolean decision, int value, Node node) {
+		node = this.locateLeaf();
+
+		decision = new Random().nextBoolean();
+
+		if (decision) {
+			node.getRightNode().setValor(value);
+		} else {
+			node.getLeftNode().setValor(value);
+		}
+
+		return node;
+	}
+
+	private int getHeight() {
+		return getHeight(rootNode);
+	}
+
+	public int getHeight(Node node) {
+		if (node == null) {
+			return -1;
+		}
+
+		int leftHeight = getHeight(node.getLeftNode());
+		int rightHeight = getHeight(node.getRightNode());
+
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
+
+	public Node locateLeaf() {
+		return this.locateNode(this.rootNode);
+	}
+
+	public int countNodes() {
+		return countNodes(rootNode);
+	}
+
+	private int countNodes(Node node) {
+		if (node == null) {
+			return 0;
+		}
+
+		return 1 + countNodes(node.getLeftNode()) + countNodes(node.getRightNode());
+	}
+
+	private Node locateNode(Node node) {
+		Random decision = new Random();
+
+		if (node.getRightNode() == null || node.getLeftNode() == null) {
+			return node;
+		}
+
+		if (decision.nextBoolean()) {
+			return locateNode(node.getRightNode());
+		} else {
+			return locateNode(node.getLeftNode());
+		}
+
+	}
+
+	private Node addNodeLeft(int value, Node node) {
+		Node newLeftNode = new Node();
+		newLeftNode.setValor(value);
+		node.setLeftNode(newLeftNode);
+
+		return newLeftNode;
+	}
+
+	private Node addNodeRight(int value, Node node) {
+		Node newRightNode = new Node();
+		newRightNode.setValor(value);
+		node.setRightNode(newRightNode);
+
+		return newRightNode;
+	}
+
+}
