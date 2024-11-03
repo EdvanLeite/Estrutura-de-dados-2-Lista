@@ -1,0 +1,37 @@
+package Application;
+
+import java.util.Random;
+
+import Entities.Node;
+import Entities.Tree;
+
+public class Program {
+	public static void main(String Args[]) {
+		
+		Random rd =  new Random();
+		
+		Tree arvore = new Tree();
+		
+		arvore.initTree(1000);
+		arvore.exibir(arvore.rootNode);
+	
+		
+		for(int i =0;i<10;i++) {
+		
+			arvore.exibir(arvore.rootNode);
+			System.out.println();
+			arvore.addNode(null, rd.nextInt(90), new Node());
+		
+		}
+		
+		System.out.println();
+		arvore.exibir(arvore.rootNode);
+		System.out.println();
+		System.out.println("Numero de Nós: " + arvore.countNodes());
+		System.out.println("Altura da Arvore: "+arvore.getHeight(arvore.rootNode));
+		System.out.println("Folha Aleatoria: " + arvore.locateLeaf().getValor());
+		
+		
+	}
+
+}
