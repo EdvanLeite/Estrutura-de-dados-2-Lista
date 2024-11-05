@@ -152,13 +152,49 @@ public class Tree {
 	    return list;
 	}
 	
-	public void removeSubtree(Node targetNode) {
-	    if (targetNode != null) {
-	        targetNode.setLeftNode(null);
-	        targetNode.setRightNode(null);
+	
+	public void removeNode(Node targetNode) {
+	    if (targetNode == null) {
+	        return;
 	    }
+	    rootNode = removeNode(rootNode, targetNode);
 	}
+
+	private Node removeNode(Node currentNode, Node targetNode) {
+	    if (currentNode == null) {
+	        return null;
+	    }
+
+	    if (targetNode.getValor() < currentNode.getValor()) {
+	        currentNode.setLeftNode(removeNode(currentNode.getLeftNode(), targetNode));
+	    } else if (targetNode.getValor() > currentNode.getValor()) {
+	        currentNode.setRightNode(removeNode(currentNode.getRightNode(), targetNode));
+	    } else {
+	       
+	        if (currentNode.getLeftNode() == null && currentNode.getRightNode() == null) {
+	            return null;
+	        }
+	       
+	        else if (currentNode.getLeftNode() == null) {
+	            return currentNode.getRightNode();
+	        } else if (currentNode.getRightNode() == null) {
+	            return currentNode.getLeftNode();
+	        }
+	        	        else {
+	            Node replacement = findMin(currentNode.getRightNode());
+	            currentNode.setValor(replacement.getValor());
+	            currentNode.setRightNode(removeNode(currentNode.getRightNode(), replacement));
+	        }
+	    }
+	    return currentNode;
+	}
+
 	
-	
+	private Node findMin(Node node) {
+	    while (node.getLeftNode() != null) {
+	        node = node.getLeftNode();
+	    }
+	    return node;
+	}
 	
 }

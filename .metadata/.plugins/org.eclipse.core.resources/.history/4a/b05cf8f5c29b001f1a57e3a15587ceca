@@ -152,13 +152,53 @@ public class Tree {
 	    return list;
 	}
 	
-	public void removeSubtree(Node targetNode) {
-	    if (targetNode != null) {
-	        targetNode.setLeftNode(null);
-	        targetNode.setRightNode(null);
-	    }
+	
+	public void removeNode(int targetValue) {
+	    rootNode = removeNode(rootNode, targetValue);
 	}
-	
-	
-	
-}
+
+	private Node removeNode(Node currentNode, int targetValue) {
+	    if (currentNode == null) {
+	        return null;
+	    }
+
+	    // Navega pela árvore para encontrar o nó a ser removido
+	    if (targetValue < currentNode.getValor()) {
+	        currentNode.setLeftNode(removeNode(currentNode.getLeftNode(), targetValue));
+	    } else if (targetValue > currentNode.getValor()) {
+	        currentNode.setRightNode(removeNode(currentNode.getRightNode(), targetValue));
+	    } else {
+	        // Caso 1: Nenhum filho
+	        if (currentNode.getLeftNode() == null && currentNode.getRightNode() == null) {
+	            return null;
+	        }
+	        // Caso 2: Apenas um filho
+	        else if (currentNode.getLeftNode() == null) {
+	            return currentNode.getRightNode();
+	        } else if (currentNode.getRightNode() == null) {
+	            return currentNode.getLeftNode();
+	        }
+	        // Caso 3: Dois filhos
+	        else {
+	            Node parent = currentNode;
+	            Node successor = currentNode.getRightNode();
+
+	            // Encontra o menor valor da subárvore direita
+	            while (successor.getLeftNode() != null) {
+	                parent = successor;
+	                successor = successor.getLeftNode();
+	            }
+
+	            // Substitui o valor do nó a ser removido pelo valor do sucessor
+	            currentNode.setValor(successor.getValor());
+
+	            // Remove o sucessor da sua posição original
+	            if (parent.getLeftNode() == successor) {
+	                parent.setLeftNode(successor.getRightNode());
+	            } else {
+	                parent.setRightNode(successor.getRightNode());
+	            }
+	        }
+	    }
+	    return currentNode;
+	}

@@ -64,20 +64,8 @@ public class Program {
 
 		System.out.println();
 		System.out.println("Lista criada Apartir da Arvore, somente com valores presentes no vetor (1 até 50): " );
-		arvore.listArray(arvore.rootNode, list, values).exibirLista();
+		arvore.listArray(arvore.rootNode, list, values).exibirLista();;
 		
-		Node rmv = new Node();
-		
-		rmv = arvore.locateLeaf();
-		System.out.println();
-		System.out.println("Nó removido: " + rmv.getValor());
-		
-		arvore.removeSubtree(rmv);
-		System.out.println();
-		arvore.exibir(arvore.rootNode);
-		
-		
-	
 		
 	}
 

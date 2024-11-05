@@ -136,29 +136,20 @@ public class Tree {
 	}
 	
 	
-	public Lista listArray(Node node, Lista list, int[] values) {
+	public Lista listArray(Node node, Lista list, int values[]) {
 	    if (node != null) {
-	        for (int value : values) {
-	            if (node.getValor() == value) {
-	                list.addElemento(node.getValor());
-	                break; 
-	            }
+	    	
+	    	for(int i=0;i<values.length;i++) {
+	    		if(node.getValor() == values[i])
+	    			list.addElemento(node.getValor());
 	        }
-
-	        listArray(node.getLeftNode(), list, values);
+	        
+	        listArray(node.getLeftNode(), list,values);
+	        
 	        listArray(node.getRightNode(), list, values);
 	    }
 
 	    return list;
 	}
-	
-	public void removeSubtree(Node targetNode) {
-	    if (targetNode != null) {
-	        targetNode.setLeftNode(null);
-	        targetNode.setRightNode(null);
-	    }
-	}
-	
-	
 	
 }

@@ -68,11 +68,8 @@ public class Program {
 		
 		Node rmv = new Node();
 		
-		rmv = arvore.locateLeaf();
-		System.out.println();
-		System.out.println("Nó removido: " + rmv.getValor());
 		
-		arvore.removeSubtree(rmv);
+		arvore.removeNode(arvore.locateLeaf());
 		System.out.println();
 		arvore.exibir(arvore.rootNode);
 		

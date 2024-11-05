@@ -152,13 +152,4 @@ public class Tree {
 	    return list;
 	}
 	
-	public void removeSubtree(Node targetNode) {
-	    if (targetNode != null) {
-	        targetNode.setLeftNode(null);
-	        targetNode.setRightNode(null);
-	    }
-	}
-	
-	
-	
 }
